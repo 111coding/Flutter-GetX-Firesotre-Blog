@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/user_controller.dart';
 
 import 'package:flutter_blog/size.dart';
 import 'package:flutter_blog/view/pages/post/write_page.dart';
@@ -15,6 +16,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // put 없으면 만들고, 있으면 찾기!!
+    UserController u = Get.find();
     return Scaffold(
       key: scaffodKey,
       floatingActionButton: FloatingActionButton(
@@ -56,6 +59,7 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _navigation(BuildContext context) {
+    UserController u = Get.find();
     return Container(
       width: getDrawerWidth(context),
       height: double.infinity,
@@ -97,7 +101,8 @@ class HomePage extends StatelessWidget {
               ),
               Divider(),
               TextButton(
-                onPressed: () {
+                onPressed: () async {
+                  await u.logout();
                   Get.offAll(LoginPage());
                 },
                 child: Text(
