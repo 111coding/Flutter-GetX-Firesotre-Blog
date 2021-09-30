@@ -17,5 +17,8 @@ class PostRepository {
     return posts;
   }
 
-  Future<Post> save(String title, String content) async => Future.value();
+  Future<Post> save(String title, String content) async {
+    DocumentSnapshot result = await _postProvider.save(title, content);
+    return Post.fromJson(result.data() as Map<String, dynamic>);
+  }
 }
