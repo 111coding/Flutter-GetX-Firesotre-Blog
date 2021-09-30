@@ -21,4 +21,6 @@ class PostProvider {
         v.update({"id": v.id});
         return v.get();
       });
+
+  Future<DocumentSnapshot> findById(String id) => Future.value();
 }

@@ -25,4 +25,6 @@ class PostController extends GetxController {
       this.posts.add(post);
     }
   }
+
+  Future<void> findById(String id) async => Future.value();
 }
