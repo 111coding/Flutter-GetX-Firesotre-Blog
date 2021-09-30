@@ -16,4 +16,6 @@ class PostRepository {
         .toList();
     return posts;
   }
+
+  Future<Post> save(String title, String content) async => Future.value();
 }

@@ -11,4 +11,6 @@ class PostProvider {
       .collection(_collection)
       .orderBy("created", descending: true)
       .get();
+
+  Future<DocumentSnapshot> save(String title, String content) => Future.value();
 }

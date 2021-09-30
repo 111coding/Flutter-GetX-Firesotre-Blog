@@ -18,4 +18,6 @@ class PostController extends GetxController {
     this.posts.value = posts;
     return posts;
   }
+
+  Future<void> save(String title, String content) async => Future.value();
 }
