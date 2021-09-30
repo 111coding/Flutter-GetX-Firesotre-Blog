@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 
 import 'package:flutter_blog/size.dart';
@@ -18,6 +19,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // put 없으면 만들고, 있으면 찾기!!
     UserController u = Get.find();
+    // 객체 생성(create) onInit 함수실행(initialize)
+    PostController p = Get.put(PostController());
+
+    //p.findAll();
+
     return Scaffold(
       key: scaffodKey,
       floatingActionButton: FloatingActionButton(
@@ -32,27 +38,31 @@ class HomePage extends StatelessWidget {
       ),
       drawer: _navigation(context),
       appBar: AppBar(
-        title: Text("Blog"),
+        title: Text("${u.isLogin}"),
       ),
       body: RefreshIndicator(
         key: refreshKey,
-        onRefresh: () async {},
-        child: ListView.separated(
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: () {
-                Get.to(() => DetailPage("$index"));
-              },
-              child: ListTile(
-                leading: Text("Index : $index"),
-                title: Text("Title : $index"),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
+        onRefresh: () async {
+          await p.findAll();
+        },
+        child: Obx(
+          () => ListView.separated(
+            itemCount: p.posts.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Get.to(() => DetailPage(p.posts[index].id));
+                },
+                child: ListTile(
+                  leading: Text("${p.posts[index].id}"),
+                  title: Text("${p.posts[index].title}"),
+                ),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return Divider();
+            },
+          ),
         ),
       ),
     );
@@ -60,6 +70,7 @@ class HomePage extends StatelessWidget {
 
   Widget _navigation(BuildContext context) {
     UserController u = Get.find();
+
     return Container(
       width: getDrawerWidth(context),
       height: double.infinity,
@@ -101,8 +112,8 @@ class HomePage extends StatelessWidget {
               ),
               Divider(),
               TextButton(
-                onPressed: () async {
-                  await u.logout();
+                onPressed: () {
+                  u.logout();
                   Get.offAll(LoginPage());
                 },
                 child: Text(
