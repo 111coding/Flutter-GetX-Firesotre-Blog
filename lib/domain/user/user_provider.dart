@@ -5,6 +5,8 @@ import 'package:flutter_blog/domain/user/user.dart';
 class UserProvider {
   final _collection = "users"; //FireStore Collection 이름
 
+  Future<QuerySnapshot> login(String uid) => Future.value();
+
   Future<DocumentReference> join(User newUser) =>
       FirebaseFirestore.instance.collection(_collection).add(newUser.toJson());
 

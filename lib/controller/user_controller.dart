@@ -7,6 +7,8 @@ class UserController extends GetxController {
   final RxBool isLogin = false.obs; // UI가 관찰 가능한 변수 => 변경 => UI가 자동 업데이트
   final principal = User().obs;
 
+  Future<int> login(String email, String password) async => -1;
+
   Future<int> join(String email, String password, String username) async {
     User principal = await _userRepository.join(email, password, username);
 
