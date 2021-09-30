@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/user_controller.dart';
 
 import 'package:flutter_blog/util/validator_util.dart';
 import 'package:flutter_blog/view/components/custom_elevated_button.dart';
@@ -10,7 +11,8 @@ import 'join_page.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
-  final _email = TextEditingController();
+  final UserController u = Get.put(UserController());
+  final _username = TextEditingController();
   final _password = TextEditingController();
 
   @override
@@ -24,7 +26,7 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.center,
               height: 200,
               child: Text(
-                "로그인 페이지",
+                "로그인 페이지 ${u.isLogin}",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -44,7 +46,7 @@ class LoginPage extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
-            controller: _email,
+            controller: _username,
             hint: "Email",
             funValidator: validateEmail(),
           ),
@@ -56,9 +58,14 @@ class LoginPage extends StatelessWidget {
           CustomElevatedButton(
             text: "로그인",
             funPageRoute: () async {
-              Get.offAll(() => HomePage());
               if (_formKey.currentState!.validate()) {
-                //
+                int result =
+                    await u.login(_username.text.trim(), _password.text.trim());
+                if (result == 1) {
+                  Get.to(() => HomePage());
+                } else {
+                  Get.snackbar("로그인 시도", "로그인 실패");
+                }
               }
             },
           ),
