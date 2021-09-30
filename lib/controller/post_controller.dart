@@ -13,5 +13,9 @@ class PostController extends GetxController {
     findAll();
   }
 
-  Future<List<Post>> findAll() async => posts;
+  Future<List<Post>> findAll() async {
+    List<Post> posts = await _postRepository.findAll();
+    this.posts.value = posts;
+    return posts;
+  }
 }

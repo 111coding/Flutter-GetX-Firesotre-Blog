@@ -7,5 +7,8 @@ class PostProvider {
   final _collection = "post";
   UserController u = Get.find<UserController>();
 
-  Future<QuerySnapshot> findAll() => Future.value();
+  Future<QuerySnapshot> findAll() => FirebaseFirestore.instance
+      .collection(_collection)
+      .orderBy("created", descending: true)
+      .get();
 }

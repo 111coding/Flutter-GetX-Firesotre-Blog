@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_provider.dart';
@@ -8,5 +9,11 @@ class PostRepository {
   UserController u = Get.find<UserController>();
   final PostProvider _postProvider = PostProvider();
 
-  Future<List<Post>> findAll() async => Future.value();
+  Future<List<Post>> findAll() async {
+    QuerySnapshot querySnapshot = await _postProvider.findAll();
+    List<Post> posts = querySnapshot.docs
+        .map((doc) => Post.fromJson(doc.data() as Map<String, dynamic>))
+        .toList();
+    return posts;
+  }
 }
