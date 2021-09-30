@@ -22,5 +22,6 @@ class PostProvider {
         return v.get();
       });
 
-  Future<DocumentSnapshot> findById(String id) => Future.value();
+  Future<DocumentSnapshot> findById(String id) =>
+      FirebaseFirestore.instance.doc("$_collection/$id").get();
 }

@@ -26,5 +26,8 @@ class PostController extends GetxController {
     }
   }
 
-  Future<void> findById(String id) async => Future.value();
+  Future<void> findById(String id) async {
+    Post post = await _postRepository.findById(id);
+    this.post.value = post;
+  }
 }
