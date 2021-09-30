@@ -1,4 +1,5 @@
 import 'package:flutter_blog/controller/user_controller.dart';
+import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_provider.dart';
 import 'package:get/get.dart';
 
@@ -6,4 +7,6 @@ import 'package:get/get.dart';
 class PostRepository {
   UserController u = Get.find<UserController>();
   final PostProvider _postProvider = PostProvider();
+
+  Future<List<Post>> findAll() async => Future.value();
 }
