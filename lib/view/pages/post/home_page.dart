@@ -51,6 +51,7 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
+                  p.findById(p.posts[index].id!);
                   Get.to(() => DetailPage(p.posts[index].id));
                 },
                 child: ListTile(
