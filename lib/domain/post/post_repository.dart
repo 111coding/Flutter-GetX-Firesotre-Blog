@@ -29,6 +29,10 @@ class PostRepository {
         : Post.fromJson(result.data() as Map<String, dynamic>);
   }
 
-  Future<int> updateById(String id, String title, String content) async =>
-      Future.value();
+  Future<int> updateById(String id, String title, String content) async {
+    // 업데이트 리턴 타입 void라 예외처리하기 위해 한번더 select
+    await _postProvider.updateById(id, title, content);
+    Post post = await findById(id);
+    return post.title == title && post.content == content ? 1 : -1;
+  }
 }

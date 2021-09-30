@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_blog/controller/dto/save_req_dto.dart';
+import 'package:flutter_blog/controller/dto/update_req_dto.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:get/get.dart';
 
@@ -26,5 +27,7 @@ class PostProvider {
       FirebaseFirestore.instance.doc("$_collection/$id").get();
 
   Future<void> updateById(String id, String title, String content) =>
-      Future.value();
+      FirebaseFirestore.instance
+          .doc("$_collection/$id")
+          .update(UpdateReqDto(title, content).toJson());
 }
