@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 
 import 'package:flutter_blog/util/validator_util.dart';
 import 'package:flutter_blog/view/components/custom_elevated_button.dart';
@@ -38,6 +39,9 @@ class WritePage extends StatelessWidget {
                 text: "글쓰기",
                 funPageRoute: () async {
                   if (_formKey.currentState!.validate()) {
+                    // 먼가호출 함수!!
+                    await Get.find<PostController>()
+                        .save(_title.text, _content.text); // 3초 (로딩 그림)
                     Get.off(() => HomePage());
                   }
                 },
