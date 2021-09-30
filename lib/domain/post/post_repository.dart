@@ -28,4 +28,7 @@ class PostRepository {
         ? Post()
         : Post.fromJson(result.data() as Map<String, dynamic>);
   }
+
+  Future<int> updateById(String id, String title, String content) async =>
+      Future.value();
 }

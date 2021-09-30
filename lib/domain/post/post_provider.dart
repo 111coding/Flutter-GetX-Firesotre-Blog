@@ -24,4 +24,7 @@ class PostProvider {
 
   Future<DocumentSnapshot> findById(String id) =>
       FirebaseFirestore.instance.doc("$_collection/$id").get();
+
+  Future<void> updateById(String id, String title, String content) =>
+      Future.value();
 }
