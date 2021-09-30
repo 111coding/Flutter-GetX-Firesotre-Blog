@@ -8,6 +8,8 @@ import 'package:flutter_blog/domain/user/user_provider.dart';
 class UserRepository {
   UserProvider _userProvider = UserProvider();
 
+  Future<void> logout() async {}
+
   Future<User> login(String email, String password) async {
     UserCredential? userCredential;
     try {
