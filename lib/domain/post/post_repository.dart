@@ -35,4 +35,6 @@ class PostRepository {
     Post post = await findById(id);
     return post.title == title && post.content == content ? 1 : -1;
   }
+
+  Future<int> deleteById(String id) async => Future.value();
 }

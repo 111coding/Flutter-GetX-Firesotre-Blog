@@ -30,4 +30,6 @@ class PostProvider {
       FirebaseFirestore.instance
           .doc("$_collection/$id")
           .update(UpdateReqDto(title, content).toJson());
+
+  Future<void> deleteById(String id) => Future.value();
 }

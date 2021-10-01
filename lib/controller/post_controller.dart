@@ -39,4 +39,6 @@ class PostController extends GetxController {
       this.posts.value = this.posts.map((e) => e.id == id ? post : e).toList();
     }
   }
+
+  Future<int> deleteById(String id) async => Future.value();
 }
