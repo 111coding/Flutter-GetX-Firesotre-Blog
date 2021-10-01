@@ -36,5 +36,10 @@ class PostRepository {
     return post.title == title && post.content == content ? 1 : -1;
   }
 
-  Future<int> deleteById(String id) async => Future.value();
+  Future<int> deleteById(String id) async {
+    // 삭제 리턴 타입 void라 예외처리하기 위해 한번더 select
+    await _postProvider.deleteById(id);
+    Post post = await findById(id);
+    return post.id == null ? 1 : -1;
+  }
 }

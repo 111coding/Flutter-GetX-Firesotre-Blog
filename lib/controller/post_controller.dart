@@ -40,5 +40,13 @@ class PostController extends GetxController {
     }
   }
 
-  Future<int> deleteById(String id) async => Future.value();
+  Future<int> deleteById(String id) async {
+    int result = await _postRepository.deleteById(id);
+    if (result == 1) {
+      print("서버 쪽 삭제 성공");
+      List<Post> result = posts.where((post) => post.id != id).toList();
+      posts.value = result;
+    }
+    return result;
+  }
 }
